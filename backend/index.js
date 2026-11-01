@@ -2,7 +2,19 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import dotenv from "dotenv";
+import connectdb from "./utils/db.js";
+dotenv.config({});
 const app = express();
+
+
+
+// app.get("/home", (req, res)=>{
+//     return res.status(200).json({
+//         message:"I am coming form backend",
+//         success:true
+//     })
+// })
 
 //middleware
 app.use(express.json());
@@ -14,7 +26,8 @@ const corsOption={
 }
 app.use(cors(corsOption));
 
-const PORT = 3000;
+const PORT = process.env.PORT||3000;
 app.listen(PORT, ()=>{
+    connectdb();
     console.log(`Server running at port ${PORT}`);
 })
