@@ -117,5 +117,72 @@ console.log(error)
 
 
 export const logout = async(req, res)=>{
-    
+
+try{
+
+
+
+    return res.status(200).cookie("token", {maxAge: 0}).json({
+        message: "logged out successfully.",
+        success: true
+
+    })
+}catch(error){
+    console.log(error)
+
+}
+
+
+
+}
+
+
+export const updateProfile = async(req, res)=>{
+
+try{
+
+   const {fullname,email, phoneNumber, bio, skills} = req.body;
+
+const file = req.file;
+if (!fullname|| !email || !phoneNumber || !bio || !skills){
+   res.status(400).json({
+    message: "Something is missing",
+    success: false
+   });
+}
+
+const skillsArray = skills.split(",");
+const userId = req.id;
+
+let user = await User.findById(userId)
+if (!user){
+    return res.status(404).json({
+        message: "user not found",
+        success: false
+    })
+}
+
+user.fullname = fullname,
+user.email = email,
+user.phoneNumber = phoneNumber,
+user.profile.bio = bio,
+user.profile.skills = skillsArray
+
+
+// resume comes later here
+
+
+
+
+await user.save();
+
+}
+catch(error){
+     
+console.log(error)
+
+
+}
+
+
 }
