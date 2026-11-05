@@ -149,7 +149,12 @@ if (!fullname|| !email || !phoneNumber || !bio || !skills){
     message: "Something is missing",
     success: false
    });
-}
+};
+
+
+// cloudinaryyy
+
+
 
 const skillsArray = skills.split(",");
 const userId = req.id;
@@ -175,6 +180,21 @@ user.profile.skills = skillsArray
 
 
 await user.save();
+
+
+user = {
+    _id: user._id,
+    fullname:user.fullname,
+    email:user.email,
+    phoneNumber:user.phoneNumber,
+    role:user.role,
+    profile:user.profile
+}
+ return res.status(201).josn({
+    message: "profile updated successfully!",
+    user,
+    success: true
+ })
 
 }
 catch(error){
