@@ -49,4 +49,4 @@ const jobSchema = new mongoose.Schema({
         timestamps:true
     }
 )
-export default Job = mongoose.Model("Job", jobSchema)
+export const Job = mongoose.Model("Job", jobSchema)

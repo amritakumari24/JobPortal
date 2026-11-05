@@ -26,4 +26,4 @@ status:{
     timestamps:true
 })
 
-export default Application = mongoose.Model("Application", applicationSchema)
+export const Application = mongoose.Model("Application", applicationSchema)

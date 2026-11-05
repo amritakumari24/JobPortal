@@ -35,3 +35,5 @@ ref: "User"
 },{
     timestamps:true
 })
+
+export const Company = mongoose.Model("Company", companySchema)

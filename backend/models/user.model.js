@@ -22,7 +22,7 @@ required: true
 
 role:{
     type:String,
-    anum:["Student", "Requiter"],
+    anum:["Student", "Recruiter"],
     required: true
 }
 , 
@@ -46,4 +46,4 @@ profile:{
 }
 )
 
-export default User = mongoose.model("User", userSchema);
+export const User = mongoose.model("User", userSchema);
