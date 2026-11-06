@@ -122,7 +122,7 @@ try{
 
 
 
-    return res.status(200).cookie("token", {maxAge: 0}).json({
+    return res.status(200).cookie("token", "", {maxAge: 0}).json({
         message: "logged out successfully.",
         success: true
 
@@ -144,19 +144,16 @@ try{
    const {fullname,email, phoneNumber, bio, skills} = req.body;
 
 const file = req.file;
-if (!fullname|| !email || !phoneNumber || !bio || !skills){
-   res.status(400).json({
-    message: "Something is missing",
-    success: false
-   });
-};
 
 
 // cloudinaryyy
 
+let skillsArray;
+if (skills){
+skillsArray = skills.split(",");
+}
 
 
-const skillsArray = skills.split(",");
 const userId = req.id;
 
 let user = await User.findById(userId)
@@ -167,11 +164,14 @@ if (!user){
     })
 }
 
-user.fullname = fullname,
-user.email = email,
-user.phoneNumber = phoneNumber,
-user.profile.bio = bio,
-user.profile.skills = skillsArray
+
+
+
+if (fullname) user.fullname = fullname
+if (email) user.email = email
+if (phoneNumber) user.phoneNumber = phoneNumber
+if (bio) user.profile.bio = bio
+if (skills) user.profile.skills = skillsArray
 
 
 // resume comes later here
@@ -190,7 +190,7 @@ user = {
     role:user.role,
     profile:user.profile
 }
- return res.status(201).josn({
+ return res.status(201).json({
     message: "profile updated successfully!",
     user,
     success: true

@@ -15,7 +15,7 @@ type:Number,
 required:true
 },
 
-passward:{
+password:{
 type:String,
 required: true
 }, 
