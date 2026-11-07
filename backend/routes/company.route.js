@@ -13,4 +13,6 @@ router.route("/update/:id").put(isAuthenticated, updateCompany);
 
 
 
-export default router;
+export default router; 
+
+
