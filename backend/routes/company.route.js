@@ -1,7 +1,7 @@
 import express from "express";
 
 import isAuthenticated from "../middlewares/isAuthenticated.js";
-import { getCompany, getCompanyById, registerCompany, updateCompany } from "../controller/company.constroller.js";
+import { getCompany, getCompanyById, registerCompany, updateCompany } from "../controller/company.controller.js";
 
 const router = express.Router();
 
