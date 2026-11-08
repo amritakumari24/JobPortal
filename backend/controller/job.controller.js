@@ -1,4 +1,4 @@
-import Job from "../models/job.model.js";
+import {Job} from "../models/job.model.js";
 
 
 export const postJob = async(req, res)=>{
@@ -30,7 +30,8 @@ const job = await  Job.create({
 
 return res.status(201).json({
     message: "new job created successfully!",
-    success: true
+    success: true,
+    job
 })
 
 
@@ -110,7 +111,7 @@ if (!jobs){
 return  res.status(200).json({
     jobs,
     success:true
-    
+
 })
 
 
