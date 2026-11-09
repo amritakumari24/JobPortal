@@ -47,12 +47,16 @@ try{
 const keyword = req.query.keyword || "";
 const query = {
     $or:[
-        {title: {$regex:keyword, $option:"i"}},
-         {description: {$regex:keyword, $option:"i"}},
+        {title: {$regex:keyword, $options:"i"}},
+         {description: {$regex:keyword, $options:"i"}},
     ]
 };
 
-const jobs = await Job.find(query);
+const jobs = await Job.find(query).populate({
+    path: "company"
+}).sort({
+  createdAt:-1  
+});
 if (!jobs){
      return res.status(404).json({
         message: "Jobs not found",
@@ -78,7 +82,7 @@ export const getJobById = async(req, res)=>{
     const jobId = req.params.id;
     const job = await Job.findById(jobId)
 
-if (!jobs){
+if (!job){
      return res.status(404).json({
         message: "Jobs not found",
         success: false
